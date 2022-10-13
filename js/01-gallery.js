@@ -5,20 +5,33 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-const gallery = document.querySelector(".gallery");
-gallery.insertAdjacentHTML("beforeend", imgMarkup);
+const galleryMarkup = imageMarkup(galleryItems);
+const imageContainer = document.querySelector('.gallery');
 
-function createImgMarkup ( galleryItems){
-    const markup = gallery.map(({preview, original, description})=>{
+imageContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+
+imageContainer.addEventListener('click',imgClick)
+
+function imageMarkup(galleryItems){
+  return galleryItems.map(({preview, original, description})=>{
         return `
         <div class="gallery__item">
-          <a class="gallery__link" href="large-image.jpg">
+          <a class="gallery__link" href="${original}">
             <img
             class="gallery__image"
-            src="small-image.jpg"
+            src="${preview}"
             data-source="large-image.jpg"
-            alt="Image description"/>
+            alt="${description}"> 
+            />
         </a>
       </div>`
-    }).join("");}
+    }).join("");
+  }
 
+  // Реализация делегирования на div.gallery и получение url большого изображения.
+
+  // imageContainer.addEventListener('click', imgClick);
+
+  function imgClick(evt) {
+    console.log(evt.target);
+  }
