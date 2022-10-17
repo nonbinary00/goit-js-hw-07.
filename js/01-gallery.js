@@ -31,10 +31,17 @@ function imageMarkup(galleryItems){
 
   // Реализация делегирования на div.gallery и получение url большого изображения.
 
-  // imageContainer.addEventListener('click', imgClick);
+  imageContainer.addEventListener('click', imgClick);
 
-  imageContainer.addEventListener("click",(evt) => {
+  // 
+  
+  function imgClick(evt) {
     evt.preventDefault();
+    if (!evt.target.classList.contains("gallery__image")) {
+      return;
+    };
+
+
   
   const modal = basicLightbox.create(`<img src="${evt.target.dataset.source}" width="800" height="600">`);
     modal.show();
@@ -47,7 +54,7 @@ function imageMarkup(galleryItems){
         }
       });
     }
-  });
+  };
 
   
   
